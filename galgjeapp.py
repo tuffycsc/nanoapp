@@ -1,11 +1,12 @@
 import random
 
+
 def kies_woord():
-    woorden = {"makkelijk": ["bal", "kat", "huis"],
-               "gemiddeld": ["fiets", "computer", "school"],
-               "moeilijk": ["programmeren", "algoritme", "database"]}
-    moeilijkheid = input("Kies een moeilijkheidsgraad (makkelijk/gemiddeld/moeilijk): ")
-    return random.choice(woorden[moeilijkheid])
+    with open('C:/Users/tufan/PycharmProjects/nano_app_store/woordenlijst.txt', 'r') as file:
+        woorden = file.read().splitlines()
+
+    return random.choice(woorden)
+
 
 def galgje():
     print("Welkom bij Galgje!")
@@ -18,7 +19,12 @@ def galgje():
         print("Geraden letters:", " ".join(geraden_letters))
         print("Huidig woord:", " ".join([letter if letter in geraden_letters else "_" for letter in woord]))
 
-        letter = input("Raad een letter: ")
+        letter = input("Raad een letter: ").lower()
+
+        if letter in geraden_letters:
+            print(f"Je hebt de letter '{letter}' al geraden.")
+            continue
+
         geraden_letters.append(letter)
 
         if letter not in woord:
@@ -31,5 +37,6 @@ def galgje():
     else:
         print(f"Helaas, je hebt verloren. Het woord was '{woord}'.")
 
-if __name__ == "__main__":
-    galgje()
+
+
+galgje()
